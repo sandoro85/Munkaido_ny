@@ -44,7 +44,7 @@ export default function RecordScreen() {
   const formatMinutes = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
+    return `${hours}ó ${mins}p`;
   };
   
   const today = new Date().toISOString().split('T')[0];
@@ -53,19 +53,19 @@ export default function RecordScreen() {
   const handleRecordEvent = async (eventType: string) => {
     if (!isOnline) {
       Alert.alert(
-        'No Internet Connection',
-        'You need an internet connection to record events. Please try again when you\'re online.'
+        'Nincs internetkapcsolat',
+        'Az események rögzítéséhez internetkapcsolat szükséges. Kérjük, próbálja újra amikor online lesz.'
       );
       return;
     }
 
     if (!hasApprovedOrganization) {
       Alert.alert(
-        'Organization Required',
-        'You need to join an organization before recording events.',
+        'Szervezet szükséges',
+        'Az események rögzítéséhez csatlakoznia kell egy szervezethez.',
         [
-          { text: 'Join Organization', onPress: () => router.push('/organizations') },
-          { text: 'Cancel', style: 'cancel' }
+          { text: 'Csatlakozás', onPress: () => router.push('/organizations') },
+          { text: 'Mégse', style: 'cancel' }
         ]
       );
       return;
@@ -88,27 +88,36 @@ export default function RecordScreen() {
         throw error;
       }
       
-      Alert.alert('Success', `${eventType.replace('_', ' ')} recorded successfully!`);
+      Alert.alert('Sikeres', `${formatEventType(eventType)} sikeresen rögzítve!`);
     } catch (error: any) {
-      Alert.alert('Error', error.message || 'Failed to record event');
+      Alert.alert('Hiba', error.message || 'Nem sikerült rögzíteni az eseményt');
     } finally {
       setRecording(null);
     }
   };
   
+  const formatEventType = (eventType: string) => {
+    const types = {
+      work_start: 'Munkakezdés',
+      work_end: 'Munkavégzés',
+      official_departure: 'Hivatalos távozás',
+      private_departure: 'Magán távozás',
+      leave: 'Szabadság'
+    };
+    return types[eventType as keyof typeof types] || eventType;
+  };
+  
   const confirmRecordEvent = (eventType: string) => {
-    const eventName = eventType.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    
     Alert.alert(
-      `Record ${eventName}`,
-      `Are you sure you want to record ${eventName.toLowerCase()} now?`,
+      `${formatEventType(eventType)} rögzítése`,
+      `Biztosan rögzíti a ${formatEventType(eventType).toLowerCase()}t most?`,
       [
         {
-          text: 'Cancel',
+          text: 'Mégse',
           style: 'cancel'
         },
         {
-          text: 'Record',
+          text: 'Rögzítés',
           onPress: () => handleRecordEvent(eventType)
         }
       ]
@@ -120,7 +129,7 @@ export default function RecordScreen() {
       <ScreenContainer>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#2563EB" />
-          <Text style={styles.loadingText}>Loading...</Text>
+          <Text style={styles.loadingText}>Betöltés...</Text>
         </View>
       </ScreenContainer>
     );
@@ -130,9 +139,9 @@ export default function RecordScreen() {
     <ScreenContainer>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Hello{user?.email ? `, ${user.email.split('@')[0]}` : ''}!</Text>
+          <Text style={styles.greeting}>Üdvözöljük{user?.email ? `, ${user.email.split('@')[0]}` : ''}!</Text>
           <Text style={styles.date}>
-            {new Date().toLocaleDateString(undefined, { 
+            {new Date().toLocaleDateString('hu-HU', { 
               weekday: 'long', 
               year: 'numeric', 
               month: 'long', 
@@ -146,17 +155,17 @@ export default function RecordScreen() {
           <Card style={styles.warningCard}>
             <Text style={styles.warningTitle}>
               {hasPendingOrganization 
-                ? 'Organization Application Pending' 
-                : 'No Organization Joined'}
+                ? 'Szervezeti jelentkezés folyamatban' 
+                : 'Nincs csatlakozott szervezet'}
             </Text>
             <Text style={styles.warningText}>
               {hasPendingOrganization 
-                ? 'Your application is waiting for approval from an administrator.' 
-                : 'You need to join an organization before you can record work events.'}
+                ? 'A jelentkezése adminisztrátori jóváhagyásra vár.' 
+                : 'Az események rögzítéséhez csatlakoznia kell egy szervezethez.'}
             </Text>
             {!hasPendingOrganization && (
               <Button 
-                title="Join Organization" 
+                title="Csatlakozás szervezethez" 
                 variant="primary" 
                 onPress={() => router.push('/organizations')}
                 style={styles.joinButton}
@@ -167,25 +176,20 @@ export default function RecordScreen() {
         
         <Card style={styles.statsCard}>
           <View style={styles.todayStats}>
-            <Text style={styles.statLabel}>Today's Work Time</Text>
+            <Text style={styles.statLabel}>Mai munkaidő</Text>
             <Text style={styles.statValue}>{formatMinutes(todayWorktime)}</Text>
-            <Text>Approved: {hasApprovedOrganization ? 'Yes' : 'No'}</Text>
-<Text>Pending: {hasPendingOrganization ? 'Yes' : 'No'}</Text>
-<Text>Loading: {loading ? 'Yes' : 'No'}</Text>
-<Text>ActiveOrg: {activeOrganization?.name ?? 'None'}</Text>
-<Text>UserOrgs: {useOrganization.length}</Text>
           </View>
           
           <TouchableOpacity 
             style={styles.viewReportButton}
             onPress={() => router.push('/report')}
           >
-            <Text style={styles.viewReportText}>View Report</Text>
+            <Text style={styles.viewReportText}>Jelentés megtekintése</Text>
           </TouchableOpacity>
         </Card>
         
         <View style={styles.buttonSection}>
-          <Text style={styles.sectionTitle}>Record Event</Text>
+          <Text style={styles.sectionTitle}>Esemény rögzítése</Text>
           
           <View style={styles.buttonGrid}>
             <TouchableOpacity 
@@ -198,7 +202,7 @@ export default function RecordScreen() {
               ) : (
                 <>
                   <Play size={30} color="#FFFFFF" />
-                  <Text style={styles.eventButtonText}>Work Start</Text>
+                  <Text style={styles.eventButtonText}>Munkakezdés</Text>
                 </>
               )}
             </TouchableOpacity>
@@ -213,7 +217,7 @@ export default function RecordScreen() {
               ) : (
                 <>
                   <Flag size={30} color="#FFFFFF" />
-                  <Text style={styles.eventButtonText}>Work End</Text>
+                  <Text style={styles.eventButtonText}>Munkavégzés</Text>
                 </>
               )}
             </TouchableOpacity>
@@ -228,7 +232,7 @@ export default function RecordScreen() {
               ) : (
                 <>
                   <UserCheck size={30} color="#FFFFFF" />
-                  <Text style={styles.eventButtonText}>Official Departure</Text>
+                  <Text style={styles.eventButtonText}>Hivatalos távozás</Text>
                 </>
               )}
             </TouchableOpacity>
@@ -243,7 +247,7 @@ export default function RecordScreen() {
               ) : (
                 <>
                   <Timer size={30} color="#FFFFFF" />
-                  <Text style={styles.eventButtonText}>Private Departure</Text>
+                  <Text style={styles.eventButtonText}>Magán távozás</Text>
                 </>
               )}
             </TouchableOpacity>
@@ -258,7 +262,7 @@ export default function RecordScreen() {
               ) : (
                 <>
                   <Calendar size={30} color="#FFFFFF" />
-                  <Text style={styles.eventButtonText}>Leave Day</Text>
+                  <Text style={styles.eventButtonText}>Szabadság</Text>
                 </>
               )}
             </TouchableOpacity>
