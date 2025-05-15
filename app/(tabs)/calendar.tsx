@@ -29,15 +29,12 @@ export default function CalendarScreen() {
   
   const loading = orgLoading || eventsLoading || holidaysLoading;
   
-  // Create calendar data
   const getDaysInMonth = useCallback((year: number, month: number) => {
     return new Date(year, month + 1, 0).getDate();
   }, []);
   
   const getFirstDayOfMonth = useCallback((year: number, month: number) => {
-    // Create a date object for the first day of the month in UTC
     const date = new Date(Date.UTC(year, month, 1));
-    // Get the day of week (0-6, where 0 is Sunday)
     return date.getUTCDay();
   }, []);
   
@@ -50,38 +47,20 @@ export default function CalendarScreen() {
   }, [holidays]);
   
   const formatEventType = (type: string) => {
-    return type.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    const types = {
+      work_start: 'Munkakezdés',
+      work_end: 'Munkavégzés',
+      official_departure: 'Hivatalos távozás',
+      private_departure: 'Magán távozás',
+      leave: 'Szabadság'
+    };
+    return types[type as keyof typeof types] || type;
   };
-  
-  const generateCalendarDays = useCallback(() => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    
-    const daysInMonth = getDaysInMonth(year, month);
-    const firstDayOfMonth = getFirstDayOfMonth(year, month);
-    
-    const days = [];
-    
-    // Add empty spaces for days before the first day of the month
-    for (let i = 0; i < firstDayOfMonth; i++) {
-      days.push(null);
-    }
-    
-    // Add the days of the month
-    for (let i = 1; i <= daysInMonth; i++) {
-      // Create date string in YYYY-MM-DD format using UTC
-      const date = new Date(Date.UTC(year, month, i));
-      const dateString = date.toISOString().split('T')[0];
-      days.push(dateString);
-    }
-    
-    return days;
-  }, [currentDate, getDaysInMonth, getFirstDayOfMonth]);
   
   const formatMinutes = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
+    return `${hours}ó ${mins}p`;
   };
   
   const previousMonth = () => {
@@ -108,7 +87,7 @@ export default function CalendarScreen() {
       <ScreenContainer>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#2563EB" />
-          <Text style={styles.loadingText}>Loading...</Text>
+          <Text style={styles.loadingText}>Betöltés...</Text>
         </View>
       </ScreenContainer>
     );
@@ -118,7 +97,7 @@ export default function CalendarScreen() {
     return (
       <ScreenContainer>
         <View style={styles.noDataContainer}>
-          <Text style={styles.noDataText}>You need to join an organization to view the calendar</Text>
+          <Text style={styles.noDataText}>A naptár megtekintéséhez csatlakoznia kell egy szervezethez</Text>
         </View>
       </ScreenContainer>
     );
@@ -127,7 +106,7 @@ export default function CalendarScreen() {
   return (
     <ScreenContainer>
       <View style={styles.container}>
-        <Text style={styles.title}>Work Calendar</Text>
+        <Text style={styles.title}>Munkanaptár</Text>
         
         <Card style={styles.calendarCard}>
           <View style={styles.calendarHeader}>
@@ -136,7 +115,7 @@ export default function CalendarScreen() {
             </TouchableOpacity>
             
             <Text style={styles.monthYearText}>
-              {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+              {currentDate.toLocaleString('hu-HU', { month: 'long', year: 'numeric' })}
             </Text>
             
             <TouchableOpacity onPress={nextMonth} style={styles.navButton}>
@@ -145,7 +124,7 @@ export default function CalendarScreen() {
           </View>
           
           <View style={styles.weekdaysContainer}>
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
+            {['Vas', 'Hét', 'Ke', 'Sze', 'Csü', 'Pén', 'Szo'].map((day, index) => (
               <Text key={index} style={styles.weekdayText}>
                 {day}
               </Text>
@@ -197,7 +176,7 @@ export default function CalendarScreen() {
         
         <View style={styles.selectedDateContainer}>
           <Text style={styles.selectedDateText}>
-            {new Date(selectedDate).toLocaleDateString(undefined, {
+            {new Date(selectedDate).toLocaleDateString('hu-HU', {
               weekday: 'long',
               year: 'numeric',
               month: 'long',
@@ -206,20 +185,20 @@ export default function CalendarScreen() {
           </Text>
           
           {isWorkday(selectedDate) ? (
-            <Text style={styles.workdayText}>Workday</Text>
+            <Text style={styles.workdayText}>Munkanap</Text>
           ) : (
             <Text style={styles.nonWorkdayText}>
-              {isHoliday(selectedDate) ? 'Holiday' : 'Weekend'}
+              {isHoliday(selectedDate) ? 'Ünnepnap' : 'Hétvége'}
             </Text>
           )}
           
           <Text style={styles.workTimeText}>
-            Work time: {formatMinutes(calculateDayWorktime(selectedDate))}
+            Munkaidő: {formatMinutes(calculateDayWorktime(selectedDate))}
           </Text>
         </View>
         
         <Card style={styles.eventsCard}>
-          <Text style={styles.eventsTitle}>Events</Text>
+          <Text style={styles.eventsTitle}>Események</Text>
           
           <ScrollView style={styles.eventsScrollView}>
             {dayEvents.length > 0 ? (
@@ -230,7 +209,7 @@ export default function CalendarScreen() {
                 </View>
               ))
             ) : (
-              <Text style={styles.noEventsText}>No events recorded for this day</Text>
+              <Text style={styles.noEventsText}>Nincsenek események ezen a napon</Text>
             )}
           </ScrollView>
         </Card>
