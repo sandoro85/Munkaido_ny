@@ -12,11 +12,11 @@ import {
 } from 'react-native';
 import { router } from 'expo-router';
 import { ArrowLeft, Building, User, Mail, Phone, MapPin } from 'lucide-react-native';
-import ScreenContainer from '@/../../components/layouts/ScreenContainer';
-import Button from '@/../../components/ui/Button';
-import Card from '@/../../components/ui/Card';
-import TextInput from '@/../../components/ui/TextInput';
-import { useOrganization } from '@../../hooks/useOrganization';
+import ScreenContainer from '@/components/layouts/ScreenContainer';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
+import TextInput from '@/components/ui/TextInput';
+import { useOrganization } from '@/hooks/useOrganization';
 
 export default function CreateOrganizationScreen() {
   const { createOrganization } = useOrganization();
