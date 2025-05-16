@@ -7,11 +7,11 @@ import {
   ActivityIndicator, 
   ScrollView 
 } from 'react-native';
-import ScreenContainer from '@/components/layouts/ScreenContainer';
-import Card from '@/components/ui/Card';
-import { useOrganization } from '@/hooks/useOrganization';
-import { useWorkEvents } from '@/hooks/useWorkEvents';
-import { useHolidays } from '@/hooks/useHolidays';
+import ScreenContainer from '../../components/layouts/ScreenContainer';
+import Card from '../../components/ui/Card';
+import { useOrganization } from '../../hooks/useOrganization';
+import { useWorkEvents } from '../../hooks/useWorkEvents';
+import { useHolidays } from '../../hooks/useHolidays';
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 
 export default function CalendarScreen() {
