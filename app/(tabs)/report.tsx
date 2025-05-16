@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import ScreenContainer from '@/components/layouts/ScreenContainer';
 import Card from '@/components/ui/Card';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
 import { useWorkEvents } from '@/hooks/useWorkEvents';
 import { ChevronDown, ChevronRight, ChevronUp } from 'lucide-react-native';
