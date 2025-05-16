@@ -13,7 +13,7 @@ import ScreenContainer from '@/components/layouts/ScreenContainer';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import WorkStatusBadge from '@/components/ui/WorkStatusBadge';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
 import { useWorkEvents } from '@/hooks/useWorkEvents';
 import { useWorkStatus } from '@/hooks/useWorkStatus';
