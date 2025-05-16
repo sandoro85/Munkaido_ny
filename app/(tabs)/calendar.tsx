@@ -12,6 +12,7 @@ import Card from '../../components/ui/Card';
 import { useOrganization } from '../../hooks/useOrganization';
 import { useWorkEvents } from '../../hooks/useWorkEvents';
 import { useHolidays } from '../../hooks/useHolidays';
+import { useAuth } from '../../hooks/useAuth';
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 
 export default function CalendarScreen() {
