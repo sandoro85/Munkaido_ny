@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import ScreenContainer from '@/components/layouts/ScreenContainer';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
 import { LogOut, Building, User as UserIcon } from 'lucide-react-native';
 
