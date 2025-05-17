@@ -217,7 +217,7 @@ export default function RecordScreen() {
               ) : (
                 <>
                   <Flag size={30} color="#FFFFFF" />
-                  <Text style={styles.eventButtonText}>Munkavégzés</Text>
+                  <Text style={styles.eventButtonText}>Munka befejezés</Text>
                 </>
               )}
             </TouchableOpacity>
