@@ -10,7 +10,8 @@
     "fetch-holidays": "node scripts/fetch-holidays.js",
     "eas-build": "npx eas-cli build",
     "eas-submit": "npx eas-cli submit",
-    "eas-update": "npx eas-cli update"
+    "eas-update": "npx eas-cli update",
+    "eas-init": "npx eas-cli init --non-interactive --id d8ff43e3-8a2a-422c-90b9-e67a3b857834"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.3",
