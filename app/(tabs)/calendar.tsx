@@ -50,7 +50,7 @@ export default function CalendarScreen() {
   const formatEventType = (type: string) => {
     const types = {
       work_start: 'Munkakezdés',
-      work_end: 'Munkavégzés',
+      work_end: 'Munka befejezés',
       official_departure: 'Hivatalos távozás',
       private_departure: 'Magán távozás',
       leave: 'Szabadság'
