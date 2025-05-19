@@ -150,7 +150,7 @@ export default function CalendarScreen() {
           </View>
           
           <View style={styles.weekdaysContainer}>
-            {['Hét', 'Ke', 'Sze', 'Csü', 'Pén', 'Szo', 'Vas'].map((day, index) => (
+            {['Vas', 'Hét', 'Ke', 'Sze', 'Csü', 'Pén', 'Szo'].map((day, index) => (
               <Text key={index} style={styles.weekdayText}>
                 {day}
               </Text>
