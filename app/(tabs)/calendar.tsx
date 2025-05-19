@@ -37,7 +37,9 @@ export default function CalendarScreen() {
   const getFirstDayOfMonth = useCallback((year: number, month: number) => {
     // Create date in local timezone instead of UTC
     const date = new Date(year, month, 1);
-    return date.getDay(); // Use getDay() instead of getUTCDay()
+    // Convert Sunday (0) to 6, and other days to day - 1 to make Monday (1) become 0
+    const day = date.getDay();
+    return day === 0 ? 6 : day - 1;
   }, []);
   
   const generateCalendarDays = useCallback(() => {
@@ -148,7 +150,7 @@ export default function CalendarScreen() {
           </View>
           
           <View style={styles.weekdaysContainer}>
-            {['Vas', 'Hét', 'Ke', 'Sze', 'Csü', 'Pén', 'Szo'].map((day, index) => (
+            {['Hét', 'Ke', 'Sze', 'Csü', 'Pén', 'Szo', 'Vas'].map((day, index) => (
               <Text key={index} style={styles.weekdayText}>
                 {day}
               </Text>
