@@ -35,10 +35,11 @@ export default function CalendarScreen() {
   }, []);
   
   const getFirstDayOfMonth = useCallback((year: number, month: number) => {
-    const date = new Date(Date.UTC(year, month, 1));
-    return date.getUTCDay();
+    // Create date in local timezone instead of UTC
+    const date = new Date(year, month, 1);
+    return date.getDay(); // Use getDay() instead of getUTCDay()
   }, []);
-
+  
   const generateCalendarDays = useCallback(() => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -51,10 +52,11 @@ export default function CalendarScreen() {
       days.push(null);
     }
 
-    // Add all days of the month
+    // Add all days of the month using local timezone
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
-      days.push(date.toISOString().split('T')[0]);
+      const formattedDate = date.toISOString().split('T')[0];
+      days.push(formattedDate);
     }
 
     return days;
@@ -159,7 +161,7 @@ export default function CalendarScreen() {
                 return <View key={`empty-${index}`} style={styles.emptyDay} />;
               }
               
-              const dayNum = new Date(day).getUTCDate();
+              const dayNum = new Date(day).getDate();
               const isSelected = day === selectedDate;
               const isToday = day === new Date().toISOString().split('T')[0];
               const isWorkDay = isWorkday(day);
