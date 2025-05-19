@@ -38,6 +38,27 @@ export default function CalendarScreen() {
     const date = new Date(Date.UTC(year, month, 1));
     return date.getUTCDay();
   }, []);
+
+  const generateCalendarDays = useCallback(() => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = getFirstDayOfMonth(year, month);
+    const daysInMonth = getDaysInMonth(year, month);
+    const days: (string | null)[] = [];
+
+    // Add empty slots for days before the first day of the month
+    for (let i = 0; i < firstDay; i++) {
+      days.push(null);
+    }
+
+    // Add all days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(year, month, day);
+      days.push(date.toISOString().split('T')[0]);
+    }
+
+    return days;
+  }, [currentDate, getFirstDayOfMonth, getDaysInMonth]);
   
   const getDayEvents = useCallback((dateString: string) => {
     return events.filter(event => event.event_date === dateString);
