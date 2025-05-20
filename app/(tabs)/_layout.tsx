@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { View, StyleSheet, Text, Platform } from 'react-native';
-import { Calendar, Clock, ChartBar as BarChart3, Settings, User, Building2 } from 'lucide-react-native';
+import { Calendar, Clock, ChartBar as BarChart3, Settings, User } from 'lucide-react-native';
 import { useAuth } from '../../hooks/useAuth';
 import { Redirect } from 'expo-router';
 
@@ -75,14 +75,6 @@ export default function TabLayout() {
         options={{
           title: 'Profile',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={User} label="Profile" />,
-        }}
-      />
-      <Tabs.Screen
-        name="organizations"
-        options={{
-          title: 'Organizations',
-          href: null,
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Building2} label="Organizations" />,
         }}
       />
     </Tabs>

@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import { useAuth } from '../../hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
-import { LogOut, Building, User as UserIcon } from 'lucide-react-native';
+import { LogOut, Building, User as UserIcon, Building2 } from 'lucide-react-native';
 
 export default function ProfileScreen() {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -32,6 +32,10 @@ export default function ProfileScreen() {
         }
       ]
     );
+  };
+
+  const handleOrganizationsPress = () => {
+    router.push('/organizations');
   };
   
   if (loading) {
@@ -96,6 +100,13 @@ export default function ProfileScreen() {
         )}
         
         <View style={styles.actions}>
+          <Button
+            title="Organizations"
+            variant="outline"
+            onPress={handleOrganizationsPress}
+            icon={<Building2 size={20} color="#2563EB" />}
+            style={styles.organizationsButton}
+          />
           <Button
             title="Sign Out"
             variant="outline"
@@ -205,5 +216,9 @@ const styles = StyleSheet.create({
   },
   actions: {
     marginTop: 'auto',
+    gap: 12,
+  },
+  organizationsButton: {
+    marginBottom: 0,
   },
 });
