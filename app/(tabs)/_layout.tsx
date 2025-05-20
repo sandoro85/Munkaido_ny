@@ -53,28 +53,28 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Record',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Clock} label="Record" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Clock} label="Rögzítés" />,
         }}
       />
       <Tabs.Screen
         name="report"
         options={{
           title: 'Report',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={BarChart3} label="Report" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={BarChart3} label="Jelentés" />,
         }}
       />
       <Tabs.Screen
         name="calendar"
         options={{
           title: 'Calendar',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Calendar} label="Calendar" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Calendar} label="Naptár" />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={User} label="Profile" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={User} label="Profil" />,
         }}
       />
     </Tabs>
