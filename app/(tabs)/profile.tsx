@@ -52,7 +52,7 @@ export default function ProfileScreen() {
   return (
     <ScreenContainer>
       <View style={styles.container}>
-        <Text style={styles.title}>Profile</Text>
+        <Text style={styles.title}>Profil</Text>
         
         <Card style={styles.profileCard}>
           <View style={styles.profileHeader}>
@@ -62,7 +62,7 @@ export default function ProfileScreen() {
             <View style={styles.profileInfo}>
               <Text style={styles.userEmail}>{user?.email}</Text>
               <Text style={styles.userRole}>
-                {activeOrganization ? 'Active Member' : 'No Organization'}
+                {activeOrganization ? 'Aktív tag' : 'Nincs szervezet'}
               </Text>
             </View>
           </View>
@@ -72,7 +72,7 @@ export default function ProfileScreen() {
           <Card style={styles.sectionCard}>
             <View style={styles.sectionHeader}>
               <Building size={20} color="#4B5563" />
-              <Text style={styles.sectionTitle}>Current Organization</Text>
+              <Text style={styles.sectionTitle}>Jelenlegi szervezet</Text>
             </View>
             
             <View style={styles.orgContainer}>
@@ -81,7 +81,7 @@ export default function ProfileScreen() {
               
               <View style={styles.orgDetails}>
                 <View style={styles.orgDetailItem}>
-                  <Text style={styles.orgDetailLabel}>Leader</Text>
+                  <Text style={styles.orgDetailLabel}>Vezető</Text>
                   <Text style={styles.orgDetailValue}>{activeOrganization.leader_name}</Text>
                 </View>
                 
@@ -91,7 +91,7 @@ export default function ProfileScreen() {
                 </View>
                 
                 <View style={styles.orgDetailItem}>
-                  <Text style={styles.orgDetailLabel}>Phone</Text>
+                  <Text style={styles.orgDetailLabel}>Telefon</Text>
                   <Text style={styles.orgDetailValue}>{activeOrganization.phone}</Text>
                 </View>
               </View>
@@ -101,14 +101,14 @@ export default function ProfileScreen() {
         
         <View style={styles.actions}>
           <Button
-            title="Organizations"
+            title="Szervezetek"
             variant="outline"
             onPress={handleOrganizationsPress}
             icon={<Building2 size={20} color="#2563EB" />}
             style={styles.organizationsButton}
           />
           <Button
-            title="Sign Out"
+            title="Kijelentkezés"
             variant="outline"
             onPress={handleSignOut}
             icon={<LogOut size={20} color="#2563EB" />}
