@@ -30,51 +30,40 @@ export default function CreateOrganizationScreen() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   
   const validate = () => {
-    console.log('[CreateOrganization] Validating form data');
     const newErrors: Record<string, string> = {};
     
     if (!orgName) {
-      newErrors.orgName = 'Organization name is required';
+      newErrors.orgName = 'A szervezet neve kötelező';
     }
     
     if (!orgAddress) {
-      newErrors.orgAddress = 'Address is required';
+      newErrors.orgAddress = 'A cím megadása kötelező';
     }
     
     if (!leaderName) {
-      newErrors.leaderName = 'Leader name is required';
+      newErrors.leaderName = 'A vezető neve kötelező';
     }
     
     if (!leaderEmail) {
-      newErrors.leaderEmail = 'Email is required';
+      newErrors.leaderEmail = 'Az email cím megadása kötelező';
     } else if (!/\S+@\S+\.\S+/.test(leaderEmail)) {
-      newErrors.leaderEmail = 'Please enter a valid email';
+      newErrors.leaderEmail = 'Kérjük, adjon meg egy érvényes email címet';
     }
     
     if (!leaderPhone) {
-      newErrors.leaderPhone = 'Phone number is required';
+      newErrors.leaderPhone = 'A telefonszám megadása kötelező';
     }
     
-    console.log('[CreateOrganization] Validation errors:', newErrors);
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
   
   const handleSubmit = async () => {
-    console.log('[CreateOrganization] Submit button pressed');
     if (!validate()) {
-      console.log('[CreateOrganization] Form validation failed');
       return;
     }
     
     setLoading(true);
-    console.log('[CreateOrganization] Creating organization with data:', {
-      name: orgName,
-      address: orgAddress,
-      leader_name: leaderName,
-      email: leaderEmail,
-      phone: leaderPhone
-    });
     
     try {
       const { data, error } = await createOrganization({
@@ -86,27 +75,21 @@ export default function CreateOrganizationScreen() {
       });
       
       if (error) {
-        console.error('[CreateOrganization] Error creating organization:', error);
         throw error;
       }
       
-      console.log('[CreateOrganization] Organization created successfully:', data);
       Alert.alert(
-        'Success',
-        'Organization created successfully!',
+        'Sikeres',
+        'A szervezet sikeresen létrejött!',
         [
           {
             text: 'OK',
-            onPress: () => {
-              console.log('[CreateOrganization] Navigating back to main screen');
-              router.replace('/(tabs)');
-            }
+            onPress: () => router.replace('/(tabs)')
           }
         ]
       );
     } catch (error: any) {
-      console.error('[CreateOrganization] Error in handleSubmit:', error);
-      Alert.alert('Error', error.message || 'Failed to create organization');
+      Alert.alert('Hiba', error.message || 'Nem sikerült létrehozni a szervezetet');
     } finally {
       setLoading(false);
     }
@@ -122,17 +105,17 @@ export default function CreateOrganizationScreen() {
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
             <ArrowLeft size={24} color="#4B5563" />
           </TouchableOpacity>
-          <Text style={styles.title}>Create Organization</Text>
+          <Text style={styles.title}>Új szervezet létrehozása</Text>
         </View>
         
         <Card style={styles.formCard}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.formSection}>
-              <Text style={styles.sectionTitle}>Organization Details</Text>
+              <Text style={styles.sectionTitle}>Szervezet adatai</Text>
               
               <TextInput
-                label="Organization Name"
-                placeholder="Enter organization name"
+                label="Szervezet neve"
+                placeholder="Adja meg a szervezet nevét"
                 value={orgName}
                 onChangeText={setOrgName}
                 error={errors.orgName}
@@ -140,8 +123,8 @@ export default function CreateOrganizationScreen() {
               />
               
               <TextInput
-                label="Organization Address"
-                placeholder="Enter full address"
+                label="Szervezet címe"
+                placeholder="Adja meg a teljes címet"
                 value={orgAddress}
                 onChangeText={setOrgAddress}
                 error={errors.orgAddress}
@@ -150,11 +133,11 @@ export default function CreateOrganizationScreen() {
             </View>
             
             <View style={styles.formSection}>
-              <Text style={styles.sectionTitle}>Leader Details</Text>
+              <Text style={styles.sectionTitle}>Vezető adatai</Text>
               
               <TextInput
-                label="Leader Name"
-                placeholder="Enter leader's full name"
+                label="Vezető neve"
+                placeholder="Adja meg a vezető teljes nevét"
                 value={leaderName}
                 onChangeText={setLeaderName}
                 error={errors.leaderName}
@@ -162,8 +145,8 @@ export default function CreateOrganizationScreen() {
               />
               
               <TextInput
-                label="Email"
-                placeholder="Enter leader's email"
+                label="Email cím"
+                placeholder="Adja meg a vezető email címét"
                 keyboardType="email-address"
                 autoCapitalize="none"
                 value={leaderEmail}
@@ -173,8 +156,8 @@ export default function CreateOrganizationScreen() {
               />
               
               <TextInput
-                label="Phone Number"
-                placeholder="Enter leader's phone number"
+                label="Telefonszám"
+                placeholder="Adja meg a vezető telefonszámát"
                 keyboardType="phone-pad"
                 value={leaderPhone}
                 onChangeText={setLeaderPhone}
@@ -184,7 +167,7 @@ export default function CreateOrganizationScreen() {
             </View>
             
             <Button
-              title="Create Organization"
+              title="Szervezet létrehozása"
               onPress={handleSubmit}
               isLoading={loading}
               fullWidth
