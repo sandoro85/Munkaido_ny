@@ -29,11 +29,8 @@ export default function OrganizationsScreen() {
   const [applying, setApplying] = useState<string | null>(null);
   
   const handleApplyToOrganization = async (organizationId: string) => {
-    console.log('[OrganizationsScreen] Apply button pressed for organization:', organizationId);
-    
     if (!user) {
-      console.error('[OrganizationsScreen] No user found when applying');
-      Alert.alert('Error', 'You must be logged in to apply to an organization');
+      Alert.alert('Hiba', 'A jelentkezéshez be kell jelentkeznie');
       return;
     }
 
@@ -42,58 +39,47 @@ export default function OrganizationsScreen() {
     );
 
     if (existingApplication) {
-      console.log('[OrganizationsScreen] Found existing application:', existingApplication);
       Alert.alert(
-        'Already Applied', 
-        'You have already applied to this organization'
+        'Már jelentkezett', 
+        'Már van egy aktív jelentkezése ehhez a szervezethez'
       );
       return;
     }
 
-    console.log('[OrganizationsScreen] Starting application process');
     setApplying(organizationId);
     
     try {
-      console.log('[OrganizationsScreen] Calling applyToOrganization');
       const { error } = await applyToOrganization(organizationId);
       
       if (error) {
-        console.error('[OrganizationsScreen] Error from applyToOrganization:', error);
-        Alert.alert('Error', error.toString());
+        Alert.alert('Hiba', error.toString());
         return;
       }
       
-      console.log('[OrganizationsScreen] Application submitted successfully');
       Alert.alert(
-        'Application Submitted',
-        'Your application has been submitted and is waiting for approval.'
+        'Jelentkezés elküldve',
+        'A jelentkezését elküldtük és jóváhagyásra vár.'
       );
     } catch (error: any) {
-      console.error('[OrganizationsScreen] Error in handleApplyToOrganization:', error);
-      Alert.alert('Error', error.message || 'Failed to apply to organization');
+      Alert.alert('Hiba', error.message || 'Nem sikerült jelentkezni a szervezethez');
     } finally {
       setApplying(null);
     }
   };
   
   const confirmApply = (organizationId: string, organizationName: string) => {
-    console.log('[OrganizationsScreen] Confirming application for:', organizationName);
     Alert.alert(
-      'Apply to Organization',
-      `Are you sure you want to apply to join ${organizationName}?`,
+      'Jelentkezés a szervezethez',
+      `Biztosan szeretne jelentkezni a(z) ${organizationName} szervezethez?`,
       [
         {
-          text: 'Cancel',
-          style: 'cancel',
-          onPress: () => console.log('[OrganizationsScreen] Application cancelled')
+          text: 'Mégse',
+          style: 'cancel'
         },
         {
-          text: 'Apply',
+          text: 'Jelentkezés',
           style: 'default',
-          onPress: () => {
-            console.log('[OrganizationsScreen] Application confirmed, proceeding...');
-            handleApplyToOrganization(organizationId);
-          }
+          onPress: () => handleApplyToOrganization(organizationId)
         }
       ]
     );
@@ -126,11 +112,11 @@ export default function OrganizationsScreen() {
         <View style={styles.orgActions}>
           {status === 'approved' ? (
             <View style={[styles.statusBadge, styles.approvedBadge]}>
-              <Text style={styles.approvedText}>Member</Text>
+              <Text style={styles.approvedText}>Tag</Text>
             </View>
           ) : status === 'pending' ? (
             <View style={[styles.statusBadge, styles.pendingBadge]}>
-              <Text style={styles.pendingText}>Pending</Text>
+              <Text style={styles.pendingText}>Folyamatban</Text>
             </View>
           ) : (
             <TouchableOpacity
@@ -141,7 +127,7 @@ export default function OrganizationsScreen() {
               {isApplying ? (
                 <ActivityIndicator size="small" color="#2563EB" />
               ) : (
-                <Text style={styles.applyButtonText}>Apply</Text>
+                <Text style={styles.applyButtonText}>Jelentkezés</Text>
               )}
             </TouchableOpacity>
           )}
@@ -155,7 +141,7 @@ export default function OrganizationsScreen() {
       <ScreenContainer>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#2563EB" />
-          <Text style={styles.loadingText}>Loading...</Text>
+          <Text style={styles.loadingText}>Betöltés...</Text>
         </View>
       </ScreenContainer>
     );
@@ -168,12 +154,12 @@ export default function OrganizationsScreen() {
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
             <ArrowLeft size={24} color="#4B5563" />
           </TouchableOpacity>
-          <Text style={styles.title}>Organizations</Text>
+          <Text style={styles.title}>Szervezetek</Text>
         </View>
         
         <View style={styles.actions}>
           <Button
-            title="Create Organization"
+            title="Új szervezet létrehozása"
             icon={<Plus size={20} color="#FFFFFF" />}
             onPress={() => router.push('/organizations/create')}
             style={styles.createButton}
@@ -189,9 +175,9 @@ export default function OrganizationsScreen() {
           />
         ) : (
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No organizations found</Text>
+            <Text style={styles.emptyText}>Nincsenek szervezetek</Text>
             <Text style={styles.emptySubtext}>
-              Create a new organization to get started
+              Hozzon létre egy új szervezetet a kezdéshez
             </Text>
           </View>
         )}
