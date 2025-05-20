@@ -82,6 +82,7 @@ export default function TabLayout() {
         options={{
           title: 'Organizations',
           href: null,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Building2} label="Organizations" />,
         }}
       />
     </Tabs>
