@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { View, StyleSheet, Text, Platform } from 'react-native';
-import { Calendar, Clock, ChartBar as BarChart3, Settings, User, Building-2 } from 'lucide-react-native';
+import { Calendar, Clock, ChartBar as BarChart3, Settings, User, Building2 } from 'lucide-react-native';
 import { useAuth } from '../../hooks/useAuth';
 import { Redirect } from 'expo-router';
 
