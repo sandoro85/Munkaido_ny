@@ -28,9 +28,14 @@ export default function ScreenContainer({
         <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
         <ScrollView
           style={styles.scrollView}
-          contentContainerStyle={contentContainerStyle}
+          contentContainerStyle={[
+            contentContainerStyle,
+            styles.scrollContent
+          ]}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
+          bounces={true}
+          overScrollMode="always"
         >
           {children}
         </ScrollView>
@@ -59,8 +64,14 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  scrollContent: {
+    flexGrow: 1,
+  },
   container: {
-    minHeight: Platform.OS === 'web' ? '100vh' : '100%',
+    minHeight: Platform.select({
+      web: '100vh',
+      default: 'auto'
+    }),
   },
   padded: {
     padding: 16,
