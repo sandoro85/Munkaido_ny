@@ -69,7 +69,7 @@ export interface Database {
           id: string
           user_id: string
           organization_id: string
-          event_type: 'work_start' | 'work_end' | 'official_departure' | 'private_departure' | 'leave'
+          event_type: 'work_start' | 'work_end' | 'official_departure' | 'private_departure' | 'return_from_departure' | 'leave'
           event_date: string
           event_time: string
           created_at: string
@@ -78,7 +78,7 @@ export interface Database {
           id?: string
           user_id: string
           organization_id: string
-          event_type: 'work_start' | 'work_end' | 'official_departure' | 'private_departure' | 'leave'
+          event_type: 'work_start' | 'work_end' | 'official_departure' | 'private_departure' | 'return_from_departure' | 'leave'
           event_date: string
           event_time: string
           created_at?: string
@@ -87,7 +87,7 @@ export interface Database {
           id?: string
           user_id?: string
           organization_id?: string
-          event_type?: 'work_start' | 'work_end' | 'official_departure' | 'private_departure' | 'leave'
+          event_type?: 'work_start' | 'work_end' | 'official_departure' | 'private_departure' | 'return_from_departure' | 'leave'
           event_date?: string
           event_time?: string
           created_at?: string

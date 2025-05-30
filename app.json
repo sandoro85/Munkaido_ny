@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "bolt-expo-nativewind",
-    "slug": "bolt-expo-nativewind",
+    "name": "Munkaidő",
+    "slug": "munkaido",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -13,7 +13,8 @@
     },
     "extra": {
       "supabaseUrl": "https://yigcbkchpjpdmqsjnnvk.supabase.co",
-      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlpZ2Nia2NocGpwZG1xc2pubnZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0MDAxMTMsImV4cCI6MjA2MDk3NjExM30.WPLzGOMk9l5jZ64GplK_KK-no6qJZip8HGUWAfg8mIs",
+      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6In
+lpZ2Nia2NocGpwZG1xc2pubnZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0MDAxMTMsImV4cCI6MjA2MDk3NjExM30.WPLzGOMk9l5jZ64GplK_KK-no6qJZip8HGUWAfg8mIs",
       "router": {
         "origin": false
       },
@@ -34,7 +35,7 @@
       "typedRoutes": true
     },
     "android": {
-      "package": "com.anonymous.boltexponativewind"
+      "package": "com.anonymous.munkaido"
     }
   }
 }

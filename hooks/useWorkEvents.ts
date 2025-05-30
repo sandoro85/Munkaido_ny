@@ -205,7 +205,6 @@ export function useWorkEvents(organizationId?: string) {
     const workStart = dayEvents.find(event => event.event_type === 'work_start');
     const workEnd = dayEvents.find(event => event.event_type === 'work_end');
     const leave = dayEvents.find(event => event.event_type === 'leave');
-    const privateDepartures = dayEvents.filter(event => event.event_type === 'private_departure');
     
     if (leave) {
       return 8 * 60; // 8 hours in minutes
@@ -215,18 +214,36 @@ export function useWorkEvents(organizationId?: string) {
       return 0;
     }
     
-    // Calculate work time in minutes
-    const start = new Date(`${date}T${workStart.event_time}`);
-    const end = new Date(`${date}T${workEnd.event_time}`);
-    let workMinutes = (end.getTime() - start.getTime()) / (1000 * 60);
+    let workMinutes = 0;
+    let currentStart = new Date(`${date}T${workStart.event_time}`);
     
-    // Subtract private departures
-    privateDepartures.forEach(departure => {
-      const departureTime = new Date(`${date}T${departure.event_time}`);
-      // For simplicity, assume each private departure is 30 minutes
-      // In a real app, you would track departure start and end times
-      workMinutes -= 30;
-    });
+    // Process all events chronologically
+    const sortedEvents = dayEvents
+      .sort((a, b) => a.event_time.localeCompare(b.event_time));
+    
+    for (let i = 0; i < sortedEvents.length; i++) {
+      const event = sortedEvents[i];
+      const eventTime = new Date(`${date}T${event.event_time}`);
+      
+      switch (event.event_type) {
+        case 'work_start':
+          currentStart = eventTime;
+          break;
+          
+        case 'work_end':
+          workMinutes += (eventTime.getTime() - currentStart.getTime()) / (1000 * 60);
+          break;
+          
+        case 'official_departure':
+        case 'private_departure':
+          workMinutes += (eventTime.getTime() - currentStart.getTime()) / (1000 * 60);
+          break;
+          
+        case 'return_from_departure':
+          currentStart = eventTime;
+          break;
+      }
+    }
     
     return Math.max(0, workMinutes);
   };

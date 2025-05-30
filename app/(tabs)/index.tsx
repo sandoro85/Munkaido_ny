@@ -17,7 +17,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
 import { useWorkEvents } from '@/hooks/useWorkEvents';
 import { useWorkStatus } from '@/hooks/useWorkStatus';
-import { Play, Timer, Flag, UserCheck, Calendar } from 'lucide-react-native';
+import { Play, Timer, Flag, UserCheck, Calendar, CornerDownLeft } from 'lucide-react-native';
 
 export default function RecordScreen() {
   const { user } = useAuth();
@@ -32,6 +32,7 @@ export default function RecordScreen() {
     recordEvent, 
     calculateDayWorktime,
     isOnline,
+    events,
     loading: eventsLoading 
   } = useWorkEvents(activeOrganization?.id);
 
@@ -49,6 +50,7 @@ export default function RecordScreen() {
   
   const today = new Date().toISOString().split('T')[0];
   const todayWorktime = calculateDayWorktime(today);
+  const requiredWorktime = 8 * 60; // 8 hours in minutes
   
   const handleRecordEvent = async (eventType: string) => {
     if (!isOnline) {
@@ -102,6 +104,7 @@ export default function RecordScreen() {
       work_end: 'Munka befejezés',
       official_departure: 'Hivatalos távozás',
       private_departure: 'Magán távozás',
+      return_from_departure: 'Visszaérkezés',
       leave: 'Szabadság'
     };
     return types[eventType as keyof typeof types] || eventType;
@@ -122,6 +125,19 @@ export default function RecordScreen() {
         }
       ]
     );
+  };
+
+  const canReturnFromDeparture = () => {
+    if (!events.length) return false;
+    
+    const todayEvents = events
+      .filter(event => event.event_date === today)
+      .sort((a, b) => b.event_time.localeCompare(a.event_time));
+    
+    if (!todayEvents.length) return false;
+    
+    const lastEvent = todayEvents[0];
+    return lastEvent.event_type === 'official_departure' || lastEvent.event_type === 'private_departure';
   };
   
   if (loading) {
@@ -178,6 +194,15 @@ export default function RecordScreen() {
           <View style={styles.todayStats}>
             <Text style={styles.statLabel}>Mai munkaidő</Text>
             <Text style={styles.statValue}>{formatMinutes(todayWorktime)}</Text>
+            <Text style={[
+              styles.workTimeStatus,
+              todayWorktime >= requiredWorktime ? styles.workTimeComplete : styles.workTimeIncomplete
+            ]}>
+              {todayWorktime >= requiredWorktime 
+                ? 'Napi munkaidő teljesítve'
+                : `Hátralévő idő: ${formatMinutes(requiredWorktime - todayWorktime)}`
+              }
+            </Text>
           </View>
           
           <TouchableOpacity 
@@ -266,6 +291,25 @@ export default function RecordScreen() {
                 </>
               )}
             </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={[
+                styles.eventButton, 
+                styles.returnButton,
+                !canReturnFromDeparture() && styles.disabledButton
+              ]}
+              onPress={() => confirmRecordEvent('return_from_departure')}
+              disabled={!hasApprovedOrganization || recording !== null || !canReturnFromDeparture()}
+            >
+              {recording === 'return_from_departure' ? (
+                <ActivityIndicator color="#FFFFFF" />
+              ) : (
+                <>
+                  <CornerDownLeft size={30} color="#FFFFFF" />
+                  <Text style={styles.eventButtonText}>Visszaérkezés</Text>
+                </>
+              )}
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -341,6 +385,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'Inter-Bold',
     color: '#1F2937',
+    marginBottom: 4,
+  },
+  workTimeStatus: {
+    fontSize: 14,
+    fontFamily: 'Inter-Medium',
+  },
+  workTimeComplete: {
+    color: '#059669',
+  },
+  workTimeIncomplete: {
+    color: '#DC2626',
   },
   viewReportButton: {
     alignSelf: 'flex-end',
@@ -401,6 +456,17 @@ const styles = StyleSheet.create({
   },
   leaveButton: {
     backgroundColor: '#EC4899',
+  },
+  returnButton: {
+    backgroundColor: '#4F46E5',
+  },
+  disabledButton: {
+    opacity: 0.5,
+    ...Platform.select({
+      web: {
+        cursor: 'not-allowed',
+      },
+    }),
   },
   eventButtonText: {
     color: '#FFFFFF',
