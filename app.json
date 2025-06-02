@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Munkaidő",
-    "slug": "MunkaidoNy",
+    "slug": "munkaidony",
     "version": "0.6.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
