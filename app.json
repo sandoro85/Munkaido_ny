@@ -13,8 +13,7 @@
     },
     "extra": {
       "supabaseUrl": "https://yigcbkchpjpdmqsjnnvk.supabase.co",
-      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6In
-lpZ2Nia2NocGpwZG1xc2pubnZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0MDAxMTMsImV4cCI6MjA2MDk3NjExM30.WPLzGOMk9l5jZ64GplK_KK-no6qJZip8HGUWAfg8mIs",
+      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlpZ2Nia2NocGpwZG1xc2pubnZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0MDAxMTMsImV4cCI6MjA2MDk3NjExM30.WPLzGOMk9l5jZ64GplK_KK-no6qJZip8HGUWAfg8mIs",
       "router": {
         "origin": false
       },
