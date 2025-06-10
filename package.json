@@ -63,5 +63,8 @@
         "listUnknownPackages": false
       }
     }
+  },
+  "overrides": {
+    "@react-navigation/native": "6.1.18"
   }
 }
