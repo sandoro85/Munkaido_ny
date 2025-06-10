@@ -40,10 +40,6 @@ yarn-error.*
 expo-env.d.ts
 # @end expo-cli
 
-# Lock files
-yarn.lock
-package-lock.json
-
-# Native folders (for CNG/Prebuild)
+# Add native folders to gitignore for CNG/Prebuild
 /android
 /ios
