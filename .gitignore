@@ -40,6 +40,6 @@ yarn-error.*
 expo-env.d.ts
 # @end expo-cli
 
-# Add native folders to gitignore for CNG/Prebuild
+# Native build folders (for Prebuild/CNG)
 /android
 /ios
