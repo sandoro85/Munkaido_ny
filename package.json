@@ -16,6 +16,7 @@
     "ios": "npx expo run:ios"
   },
   "dependencies": {
+    "@babel/runtime": "^7.24.0",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo/vector-icons": "^14.0.0",
     "@react-native-community/netinfo": "11.4.1",
