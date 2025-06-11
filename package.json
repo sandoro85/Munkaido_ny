@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "expo": "53.0.11",
-    "@expo-google-fonts/inter": "^0.2.14",
+    "@expo-google-fonts/inter": "^0.2.3",
     "@expo/vector-icons": "^14.1.0",
     "@react-native-community/netinfo": "11.4.1",
     "@supabase/supabase-js": "^2.40.0",
