@@ -15,7 +15,13 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import { useAuth } from '@/hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
-import { Building, Plus, ChevronRight, ArrowLeft } from 'lucide-react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { 
+  faBuilding, 
+  faPlus, 
+  faChevronRight, 
+  faArrowLeft 
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function OrganizationsScreen() {
   const { user } = useAuth();
@@ -100,13 +106,13 @@ export default function OrganizationsScreen() {
       <Card style={styles.orgCard}>
         <View style={styles.orgHeader}>
           <View style={styles.orgIcon}>
-            <Building size={24} color="#2563EB" />
+            <FontAwesomeIcon icon={faBuilding} size={24} color="#2563EB" />
           </View>
           <View style={styles.orgInfo}>
             <Text style={styles.orgName}>{item.name}</Text>
             <Text style={styles.orgAddress}>{item.address}</Text>
           </View>
-          <ChevronRight size={20} color="#6B7280" />
+          <FontAwesomeIcon icon={faChevronRight} size={20} color="#6B7280" />
         </View>
         
         <View style={styles.orgActions}>
@@ -152,7 +158,7 @@ export default function OrganizationsScreen() {
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-            <ArrowLeft size={24} color="#4B5563" />
+            <FontAwesomeIcon icon={faArrowLeft} size={24} color="#4B5563" />
           </TouchableOpacity>
           <Text style={styles.title}>Szervezetek</Text>
         </View>
@@ -160,7 +166,7 @@ export default function OrganizationsScreen() {
         <View style={styles.actions}>
           <Button
             title="Új szervezet létrehozása"
-            icon={<Plus size={20} color="#FFFFFF" />}
+            icon={<FontAwesomeIcon icon={faPlus} size={20} color="#FFFFFF" />}
             onPress={() => router.push('/organizations/create')}
             style={styles.createButton}
           />

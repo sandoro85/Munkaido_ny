@@ -17,7 +17,15 @@ import { useAuth } from '../../hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
 import { useWorkEvents } from '@/hooks/useWorkEvents';
 import { useWorkStatus } from '@/hooks/useWorkStatus';
-import { Play, Timer, Flag, UserCheck, Calendar, CornerDownLeft } from 'lucide-react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { 
+  faPlay, 
+  faClock, 
+  faFlag, 
+  faUserCheck, 
+  faCalendar, 
+  faArrowLeft 
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function RecordScreen() {
   const { user } = useAuth();
@@ -226,7 +234,7 @@ export default function RecordScreen() {
                 <ActivityIndicator color="#FFFFFF" />
               ) : (
                 <>
-                  <Play size={30} color="#FFFFFF" />
+                  <FontAwesomeIcon icon={faPlay} size={30} color="#FFFFFF" />
                   <Text style={styles.eventButtonText}>Munkakezdés</Text>
                 </>
               )}
@@ -241,7 +249,7 @@ export default function RecordScreen() {
                 <ActivityIndicator color="#FFFFFF" />
               ) : (
                 <>
-                  <Flag size={30} color="#FFFFFF" />
+                  <FontAwesomeIcon icon={faFlag} size={30} color="#FFFFFF" />
                   <Text style={styles.eventButtonText}>Munka befejezés</Text>
                 </>
               )}
@@ -256,7 +264,7 @@ export default function RecordScreen() {
                 <ActivityIndicator color="#FFFFFF" />
               ) : (
                 <>
-                  <UserCheck size={30} color="#FFFFFF" />
+                  <FontAwesomeIcon icon={faUserCheck} size={30} color="#FFFFFF" />
                   <Text style={styles.eventButtonText}>Hivatalos távozás</Text>
                 </>
               )}
@@ -271,7 +279,7 @@ export default function RecordScreen() {
                 <ActivityIndicator color="#FFFFFF" />
               ) : (
                 <>
-                  <Timer size={30} color="#FFFFFF" />
+                  <FontAwesomeIcon icon={faClock} size={30} color="#FFFFFF" />
                   <Text style={styles.eventButtonText}>Magán távozás</Text>
                 </>
               )}
@@ -286,7 +294,7 @@ export default function RecordScreen() {
                 <ActivityIndicator color="#FFFFFF" />
               ) : (
                 <>
-                  <Calendar size={30} color="#FFFFFF" />
+                  <FontAwesomeIcon icon={faCalendar} size={30} color="#FFFFFF" />
                   <Text style={styles.eventButtonText}>Szabadság</Text>
                 </>
               )}
@@ -305,7 +313,7 @@ export default function RecordScreen() {
                 <ActivityIndicator color="#FFFFFF" />
               ) : (
                 <>
-                  <CornerDownLeft size={30} color="#FFFFFF" />
+                  <FontAwesomeIcon icon={faArrowLeft} size={30} color="#FFFFFF" />
                   <Text style={styles.eventButtonText}>Visszaérkezés</Text>
                 </>
               )}

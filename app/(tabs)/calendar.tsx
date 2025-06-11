@@ -13,7 +13,8 @@ import { useOrganization } from '../../hooks/useOrganization';
 import { useWorkEvents } from '../../hooks/useWorkEvents';
 import { useHolidays } from '../../hooks/useHolidays';
 import { useAuth } from '../../hooks/useAuth';
-import { ChevronLeft, ChevronRight } from 'lucide-react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function CalendarScreen() {
   const { activeOrganization, loading: orgLoading } = useOrganization();
@@ -137,7 +138,7 @@ export default function CalendarScreen() {
         <Card style={styles.calendarCard}>
           <View style={styles.calendarHeader}>
             <TouchableOpacity onPress={previousMonth} style={styles.navButton}>
-              <ChevronLeft size={24} color="#4B5563" />
+              <FontAwesomeIcon icon={faChevronLeft} size={24} color="#4B5563" />
             </TouchableOpacity>
             
             <Text style={styles.monthYearText}>
@@ -145,7 +146,7 @@ export default function CalendarScreen() {
             </Text>
             
             <TouchableOpacity onPress={nextMonth} style={styles.navButton}>
-              <ChevronRight size={24} color="#4B5563" />
+              <FontAwesomeIcon icon={faChevronRight} size={24} color="#4B5563" />
             </TouchableOpacity>
           </View>
           

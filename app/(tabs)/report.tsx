@@ -13,7 +13,8 @@ import Card from '@/components/ui/Card';
 import { useAuth } from '../../hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
 import { useWorkEvents } from '@/hooks/useWorkEvents';
-import { ChevronDown, ChevronRight, ChevronUp } from 'lucide-react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronDown, faChevronRight, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function ReportScreen() {
   const { user } = useAuth();
@@ -117,11 +118,11 @@ export default function ReportScreen() {
           onPress={() => setExpandedYear(isExpanded ? null : year)}
         >
           <Text style={styles.yearText}>{year}</Text>
-          {isExpanded ? (
-            <ChevronUp size={24} color="#6B7280" />
-          ) : (
-            <ChevronDown size={24} color="#6B7280" />
-          )}
+          <FontAwesomeIcon 
+            icon={isExpanded ? faChevronUp : faChevronDown} 
+            size={24} 
+            color="#6B7280" 
+          />
         </TouchableOpacity>
         
         {isExpanded && (
@@ -154,11 +155,11 @@ export default function ReportScreen() {
               {formatMinutes(monthBalance)}
             </Text>
           </View>
-          {isExpanded ? (
-            <ChevronUp size={20} color="#6B7280" />
-          ) : (
-            <ChevronDown size={20} color="#6B7280" />
-          )}
+          <FontAwesomeIcon 
+            icon={isExpanded ? faChevronUp : faChevronDown} 
+            size={20} 
+            color="#6B7280" 
+          />
         </TouchableOpacity>
         
         {isExpanded && (
@@ -208,11 +209,11 @@ export default function ReportScreen() {
               )}
             </View>
           </View>
-          {isExpanded ? (
-            <ChevronUp size={20} color="#6B7280" />
-          ) : (
-            <ChevronRight size={20} color="#6B7280" />
-          )}
+          <FontAwesomeIcon 
+            icon={isExpanded ? faChevronUp : faChevronRight} 
+            size={20} 
+            color="#6B7280" 
+          />
         </TouchableOpacity>
         
         {isExpanded && (

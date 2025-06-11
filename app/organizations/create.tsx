@@ -11,12 +11,20 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { router } from 'expo-router';
-import { ArrowLeft, Building, User, Mail, Phone, MapPin } from 'lucide-react-native';
 import ScreenContainer from '@/components/layouts/ScreenContainer';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import TextInput from '@/components/ui/TextInput';
 import { useOrganization } from '@/hooks/useOrganization';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { 
+  faArrowLeft, 
+  faBuilding, 
+  faUser, 
+  faEnvelope, 
+  faPhone, 
+  faMapMarkerAlt 
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function CreateOrganizationScreen() {
   const { createOrganization } = useOrganization();
@@ -103,7 +111,7 @@ export default function CreateOrganizationScreen() {
       >
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-            <ArrowLeft size={24} color="#4B5563" />
+            <FontAwesomeIcon icon={faArrowLeft} size={24} color="#4B5563" />
           </TouchableOpacity>
           <Text style={styles.title}>Új szervezet létrehozása</Text>
         </View>
@@ -119,7 +127,7 @@ export default function CreateOrganizationScreen() {
                 value={orgName}
                 onChangeText={setOrgName}
                 error={errors.orgName}
-                leftIcon={<Building size={20} color="#4B5563" />}
+                leftIcon={<FontAwesomeIcon icon={faBuilding} size={20} color="#4B5563" />}
               />
               
               <TextInput
@@ -128,7 +136,7 @@ export default function CreateOrganizationScreen() {
                 value={orgAddress}
                 onChangeText={setOrgAddress}
                 error={errors.orgAddress}
-                leftIcon={<MapPin size={20} color="#4B5563" />}
+                leftIcon={<FontAwesomeIcon icon={faMapMarkerAlt} size={20} color="#4B5563" />}
               />
             </View>
             
@@ -141,7 +149,7 @@ export default function CreateOrganizationScreen() {
                 value={leaderName}
                 onChangeText={setLeaderName}
                 error={errors.leaderName}
-                leftIcon={<User size={20} color="#4B5563" />}
+                leftIcon={<FontAwesomeIcon icon={faUser} size={20} color="#4B5563" />}
               />
               
               <TextInput
@@ -152,7 +160,7 @@ export default function CreateOrganizationScreen() {
                 value={leaderEmail}
                 onChangeText={setLeaderEmail}
                 error={errors.leaderEmail}
-                leftIcon={<Mail size={20} color="#4B5563" />}
+                leftIcon={<FontAwesomeIcon icon={faEnvelope} size={20} color="#4B5563" />}
               />
               
               <TextInput
@@ -162,7 +170,7 @@ export default function CreateOrganizationScreen() {
                 value={leaderPhone}
                 onChangeText={setLeaderPhone}
                 error={errors.leaderPhone}
-                leftIcon={<Phone size={20} color="#4B5563" />}
+                leftIcon={<FontAwesomeIcon icon={faPhone} size={20} color="#4B5563" />}
               />
             </View>
             

@@ -14,7 +14,8 @@ import ScreenContainer from '@/components/layouts/ScreenContainer';
 import TextInput from '@/components/ui/TextInput';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
-import { Mail, Lock, User } from 'lucide-react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -105,7 +106,7 @@ export default function Auth() {
             value={email}
             onChangeText={setEmail}
             error={errors.email}
-            leftIcon={<Mail size={20} color="#4B5563" />}
+            leftIcon={<FontAwesomeIcon icon={faEnvelope} size={20} color="#4B5563" />}
           />
           
           <TextInput
@@ -115,7 +116,7 @@ export default function Auth() {
             value={password}
             onChangeText={setPassword}
             error={errors.password}
-            leftIcon={<Lock size={20} color="#4B5563" />}
+            leftIcon={<FontAwesomeIcon icon={faLock} size={20} color="#4B5563" />}
           />
           
           {isSignUp && (
@@ -126,7 +127,7 @@ export default function Auth() {
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               error={errors.confirmPassword}
-              leftIcon={<Lock size={20} color="#4B5563" />}
+              leftIcon={<FontAwesomeIcon icon={faLock} size={20} color="#4B5563" />}
             />
           )}
           

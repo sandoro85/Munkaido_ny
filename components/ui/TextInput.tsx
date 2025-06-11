@@ -7,7 +7,8 @@ import {
   TextInputProps as RNTextInputProps,
   TouchableOpacity,
 } from 'react-native';
-import { Eye, EyeOff } from 'lucide-react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 interface TextInputProps extends RNTextInputProps {
   label?: string;
@@ -69,11 +70,11 @@ export default function TextInput({
             onPress={togglePasswordVisibility}
             style={styles.rightIconContainer}
           >
-            {isPasswordVisible ? (
-              <EyeOff size={20} color="#4A5568" />
-            ) : (
-              <Eye size={20} color="#4A5568" />
-            )}
+            <FontAwesomeIcon 
+              icon={isPasswordVisible ? faEyeSlash : faEye} 
+              size={20} 
+              color="#4A5568" 
+            />
           </TouchableOpacity>
         )}
       </View>

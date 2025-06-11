@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { View, StyleSheet, Text, Platform } from 'react-native';
-import { Calendar, Clock, BarChart3, Settings, User } from 'lucide-react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCalendar, faClock, faChartBar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../hooks/useAuth';
 import { Redirect } from 'expo-router';
 
@@ -15,7 +16,7 @@ export default function TabLayout() {
   // Custom tab bar button component
   function TabBarIcon({ 
     focused, 
-    icon: Icon, 
+    icon, 
     label 
   }: { 
     focused: boolean; 
@@ -24,10 +25,10 @@ export default function TabLayout() {
   }) {
     return (
       <View style={styles.tabBarItem}>
-        <Icon 
+        <FontAwesomeIcon 
+          icon={icon}
           size={24} 
           color={focused ? '#2563EB' : '#6B7280'} 
-          strokeWidth={focused ? 2.5 : 2}
         />
         <Text 
           style={[
@@ -53,28 +54,28 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Record',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Clock} label="Rögzítés" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={faClock} label="Rögzítés" />,
         }}
       />
       <Tabs.Screen
         name="report"
         options={{
           title: 'Report',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={BarChart3} label="Jelentés" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={faChartBar} label="Jelentés" />,
         }}
       />
       <Tabs.Screen
         name="calendar"
         options={{
           title: 'Calendar',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Calendar} label="Naptár" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={faCalendar} label="Naptár" />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={User} label="Profil" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={faUser} label="Profil" />,
         }}
       />
     </Tabs>

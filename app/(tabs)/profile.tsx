@@ -5,7 +5,8 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import { useAuth } from '../../hooks/useAuth';
 import { useOrganization } from '@/hooks/useOrganization';
-import { LogOut, Building, User as UserIcon, Building2 } from 'lucide-react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSignOutAlt, faBuilding, faUser, faBuilding as faBuildingAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProfileScreen() {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -57,7 +58,7 @@ export default function ProfileScreen() {
         <Card style={styles.profileCard}>
           <View style={styles.profileHeader}>
             <View style={styles.avatarContainer}>
-              <UserIcon size={36} color="#2563EB" />
+              <FontAwesomeIcon icon={faUser} size={36} color="#2563EB" />
             </View>
             <View style={styles.profileInfo}>
               <Text style={styles.userEmail}>{user?.email}</Text>
@@ -71,7 +72,7 @@ export default function ProfileScreen() {
         {activeOrganization && (
           <Card style={styles.sectionCard}>
             <View style={styles.sectionHeader}>
-              <Building size={20} color="#4B5563" />
+              <FontAwesomeIcon icon={faBuilding} size={20} color="#4B5563" />
               <Text style={styles.sectionTitle}>Jelenlegi szervezet</Text>
             </View>
             
@@ -104,14 +105,14 @@ export default function ProfileScreen() {
             title="Szervezetek"
             variant="outline"
             onPress={handleOrganizationsPress}
-            icon={<Building2 size={20} color="#2563EB" />}
+            icon={<FontAwesomeIcon icon={faBuildingAlt} size={20} color="#2563EB" />}
             style={styles.organizationsButton}
           />
           <Button
             title="Kijelentkezés"
             variant="outline"
             onPress={handleSignOut}
-            icon={<LogOut size={20} color="#2563EB" />}
+            icon={<FontAwesomeIcon icon={faSignOutAlt} size={20} color="#2563EB" />}
           />
         </View>
       </View>
