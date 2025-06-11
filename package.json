@@ -37,9 +37,9 @@
     "expo-status-bar": "~2.3.0",
     "expo-system-ui": "~6.0.0",
     "expo-web-browser": "~15.0.0",
-    "lucide-react-native": "^0.475.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "lucide-react-native": "^0.454.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-native": "0.79.0",
     "react-native-gesture-handler": "^2.25.0",
     "react-native-reanimated": "^3.17.4",
@@ -53,7 +53,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@types/react": "~19.0.10",
+    "@types/react": "~18.3.12",
     "@types/react-native": "~0.79.0",
     "eas-cli": "^7.3.0",
     "typescript": "^5.4.2"
