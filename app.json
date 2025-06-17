@@ -1,42 +1,29 @@
 {
   "expo": {
-    "name": "Munkaidő",
-    "slug": "munkaidony",
-    "version": "0.6.0",
+    "name": "Expo App",
+    "slug": "expo-app",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.munkaidony.app"
+      "supportsTablet": true
     },
     "android": {
-      "package": "com.munkaidony.app",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icon.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
-    },
-    "extra": {
-      "supabaseUrl": "https://yigcbkchpjpdmqsjnnvk.supabase.co",
-      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlpZ2Nia2NocGpwZG1xc2pubnZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0MDAxMTMsImV4cCI6MjA2MDk3NjExM30.WPLzGOMk9l5jZ64GplK_KK-no6qJZip8HGUWAfg8mIs",
-      "router": {
-        "origin": false
       },
-      "eas": {
-        "projectId": "d8ff43e3-8a2a-422c-90b9-e67a3b857834"
-      }
+      "package": "com.expo.app"
     },
     "web": {
       "bundler": "metro",
-      "output": "single",
-      "favicon": "./assets/images/favicon.png"
+      "output": "static",
+      "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router",
-      "expo-secure-store"
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
