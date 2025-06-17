@@ -72,4 +72,8 @@
     },
     "jsEngine": "hermes"
   }
+  "overrides": {
+  "@expo/config-plugins": "~10.0.0",
+  "@expo/prebuild-config": "~9.0.0"
+  }
 }
