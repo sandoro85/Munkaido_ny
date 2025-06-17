@@ -89,7 +89,7 @@ export default function Auth() {
         style={styles.container}
       >
         <View style={styles.headerContainer}>
-          <Text style={styles.logo}>WorkTrack</Text>
+          <Text style={styles.logo}>Munkaidő</Text>
           <Text style={styles.subtitle}>Munkaidő követés egyszerűen</Text>
         </View>
         
