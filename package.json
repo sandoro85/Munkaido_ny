@@ -57,7 +57,7 @@
     "@babel/core": "^7.25.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@types/react": "~19.0.10",
-    "@types/react-native": "~0.79.0",
+    "@types/react-native": "~0.73.1",
     "eas-cli": "^7.3.0",
     "typescript": "^5.4.2"
   },
