@@ -60,7 +60,6 @@
     "typescript": "^5.4.2"
   },
   "expo": {
-    "sdkVersion": "53.0.11",
     "developer": {
       "tools": {
         "babel-preset-expo": true
