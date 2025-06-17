@@ -9,7 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.munkaidony.app"
+    },
+    "android": {
+      "package": "com.munkaidony.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#ffffff"
+      }
     },
     "extra": {
       "supabaseUrl": "https://yigcbkchpjpdmqsjnnvk.supabase.co",
