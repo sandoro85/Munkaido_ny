@@ -1,11 +1,7 @@
 pluginManagement {
-    def reactNativeRoot = new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim()).getParentFile()
-    def pluginPath = new File(["node", "--print", "require.resolve('@react-native/gradle-plugin/package.json')"].execute(null, rootDir).text.trim()).getParentFile()
-    includeBuild(pluginPath.toString())
-}
-
-plugins {
-    id 'com.facebook.react.settings' version '0.73.7'
+    def reactNativeGradlePluginPath = new File(["node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })"]
+        .execute(null, rootDir).text.trim()).getParentFile()
+    includeBuild(reactNativeGradlePluginPath)
 }
 
 extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
@@ -31,13 +27,16 @@ rootProject.name = 'Munkaidő'
 dependencyResolutionManagement {
     versionCatalogs {
         reactAndroidLibs {
-            def reactNativePath = new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim())
+            def reactNativePath = new File(["node", "--print", "require.resolve('react-native/package.json')"]
+                .execute(null, rootDir).text.trim())
             from(files(new File(reactNativePath.getParentFile(), "../gradle/libs.versions.toml")))
         }
     }
 }
 
-apply from: new File(["node", "--print", "require.resolve('expo/package.json')"].execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle")
+apply from: new File(["node", "--print", "require.resolve('expo/package.json')"]
+    .execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle")
+
 useExpoModules()
 
 include ':app'
